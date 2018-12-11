@@ -13,10 +13,6 @@ cd ${YOUR_PROJECT_NAME}
 
 npm install
 
-vim ./src/utils/env.js
-
-# 依据下方配置项配置 env.js 后
-
 npm run dev
 ```
 
@@ -27,7 +23,7 @@ npm run dev
 ---  | --- | --- | ---
 USER_LOGIN_API_URL | String | "/auth/login" | 用户登录 API URL
 USER_INFO_API_URL | String | "/auth/getUserRelateData" | 用户信息 API URL
-APP_CODE_LIST | Array | ["eos-admin", "eos-store"] | 子系统 APP CODE LIST
+APP_CODE_LIST | Array | ["gms-gvt", "gms-store"] | 子系统 APP CODE LIST
 FRONTEND_DOMAIN | String | "http://localhost:8080/#" | 前端 domain, 用以 mock 菜单数据
 BACKEND_DOMAIN | String | "http://192.168.1.81:18001" | 后端 domain, 用以赋值 axios.baseURL
 ENV | String | "release" | Nodejs 环境变量

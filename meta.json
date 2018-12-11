@@ -1,0 +1,20 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "label": "项目名称",
+      "default": "A GVT Frontend Project"
+    },
+    "description": {
+      "type": "string",
+      "label": "项目描述",
+      "default": "Based On Vuejs"
+    },
+    "author": {
+      "type": "string",
+      "label": "作者",
+      "default": "Frontend Developers For GVT"
+    }
+  },
+  "completeMessage": "{{#inPlace}}To get started:\n\n  npm install\n  npm run dev{{else}}To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev{{/inPlace}}"
+}
