@@ -1,11 +1,11 @@
 // 用户登录 API URL, excute domain!
-const USER_LOGIN_API_URL = "/auth/login";
+const USER_LOGIN_API_URL = "";
 
 // 用户信息 API URL, excute domain!
-const USER_INFO_API_URL = "/auth/getUserRelateData";
+const USER_INFO_API_URL = "";
 
 // 子系统 APP CODE LIST
-const APP_CODE_LIST = ["eos-admin", "eos-shop"];
+const APP_CODE_LIST = [];
 
 // service for sidebar mock data
 let frontend;
@@ -28,9 +28,9 @@ switch (process.env.NODE_ENV) {
     break;
   default:
     // required
-    frontend = "http://localhost:8080/#";
+    frontend = "";
     // required
-    backend = "http://192.168.1.81:18001";
+    backend = "";
 }
 
 // FRONTEND_DOMAIN module
