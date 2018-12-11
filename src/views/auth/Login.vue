@@ -4,8 +4,8 @@
 
 <script>
 import md5 from "js-md5";
-import { login } from "~api/auth";
-import Auth from "~utils/auth";
+import { login } from "~/api/auth";
+import Auth from "~/utils/auth";
 
 export default {
   name: "auth-login",

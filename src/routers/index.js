@@ -1,10 +1,10 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import ContainerRoot from "~components/container/ContainerRoot.vue"
-import Console from "~views/console/Index.vue"
-import Login from "~views/auth/Login.vue"
-import * as ErrorView from "~views/error"
+import ContainerRoot from "~/components/container/ContainerRoot.vue"
+import Console from "~/views/console/Index.vue"
+import Login from "~/views/auth/Login.vue"
+import * as ErrorView from "~/views/error"
 
 Vue.use(VueRouter)
 
