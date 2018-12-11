@@ -11,11 +11,20 @@ Vue.use(iView);
 Vue.use(HeroUI);
 Vue.use(VueBus);
 
+/**
+ * 路径白名单
+ * 
+ * 任意场景都能无阻碍访问
+ */
 const accessRoutePath = ["/login", "/403", "/404", "/500"];
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
 
+  /**
+   * 用以对接其他子系统跳转
+   * 每当 query.token 存在时, 更新本地 jwt
+   */
   to.query.token && Auth.setToken(to.query.token);
 
   if(Auth.getToken()) {
