@@ -15,15 +15,15 @@ var menuData = [
     childBisFunction: [
       {
         name: "二级菜单-1",
-        uri: `${domain}/111`,
+        uri: `${domain}/1-1`,
       },
       {
         name: "二级菜单-2",
-        uri: `${domain}/222`,
+        uri: `${domain}/1-2`,
       },
       {
         name: "二级菜单-3",
-        uri: `${domain}/333`,
+        uri: `${domain}/1-3`,
       }
     ]
   }
