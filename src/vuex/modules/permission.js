@@ -35,7 +35,9 @@ function parseApps(apps) {
 
 const permission = {
   state: {
+    // 权限列表
     permissions: [],
+    // 菜单数据
     menus: []
   },
 

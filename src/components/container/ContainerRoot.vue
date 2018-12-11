@@ -13,7 +13,8 @@
 
 <script>
 import Auth from "~utils/auth";
-import { FRONTEND_DOMAIN } from "~utils/env";
+import { FRONTEND_DOMAIN, ENV } from "~utils/env";
+import { mapGetters } from "vuex";
 
 export default {
   name: "container-root",
@@ -23,6 +24,10 @@ export default {
       menuData: [],
       routeMatched: []
     }
+  },
+
+  computed: {
+    ...mapGetters(["menus"])
   },
 
   watch: {
@@ -37,7 +42,7 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
-      this.menuData = this.mockMenuData();
+      this.menuData = ENV === "development" ? this.mockMenuData() : this.menus;
     });
   },
 

@@ -30,9 +30,7 @@ router.beforeEach((to, from, next) => {
           })
         }).catch(error => {
           Auth.removeToken();
-          let vm = new Vue();
-          vm.$Message.error(error.msg);
-          next({ path: `/${error.status}` });
+          next({ path: `/${error.redirect}` });
           iView.LoadingBar.finish();
         })
       }else{

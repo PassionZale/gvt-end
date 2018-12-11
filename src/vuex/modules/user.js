@@ -10,8 +10,6 @@ const user = {
     name: "",
     // 账号
     userName: "",
-    // 商户 ID
-    tenantId: "",
     // 默认为商户用户
     isTenant: true
   },
@@ -36,7 +34,6 @@ const user = {
       state.id = "";
       state.name = "";
       state.userName = "";
-      state.tenantId = "";
       state.isTenant = true;
       Auth.logOut();
     }
@@ -48,18 +45,53 @@ const user = {
       return new Promise((resolve, reject) => {
         fetchUser().then(response => {
 
-          let app = {};
+          if(["110002", "110003", "110004", "110103"].indexOf(response.data.code) > -1) {
+            reject({ redirect: "login", msg: "登录过期, 请重新登录!" });
+            return;
+          }
 
-          // 接口返回的数据源
+          // 用户数据源
           const userinfo = response.data;
 
-          // 当前用户为 "平台用户" (类似管理员)
+          /**
+           * 依据自定义 app.code 校验所筛选出的 app item
+           * 
+           * 默认为 {}, 请不要改变它
+           */
+          let appFound = {};
+
+
+          // START
+          // 自定义 app.code 校验规则
+          // 大部分情况你要改写这一段校验规则
+          // --------------------------------------------------
+
+          /**
+           * 访问权限校验
+           * 
+           * 依据当前业务进行校验
+           * 
+           * 例如, 下面这一段校验业务, 此业务基于《商品库》项目实际校验逻辑
+           * 
+           * 
+           * 假定你在 env.js 中定义了 APP_CODE_LIST = ["gms-gvt", "gms-store"]
+           * 它们分别表示: 管理员所持有的 APP: GVT商品库; 商户所持有的 APP: 商户商品库
+           * 
+           * 通过 user.system === 1 ? "管理员" : "商户"
+           * 
+           * 当 user 标识为 "管理员" 时, 必须持有 app.code === "gms-gvt", 若无, 则 reject 403 error
+           * 
+           * 当 user 标识为 "商户" 时, 必须持有 app.code === "gms-store", 若无, 则 reject 403 error
+           * 
+           * 若存在符合的 app item, 则将其
+           * 
+           * 请依据当前系统实际业务改写这一段 if else
+           * 
+           */
           if (userinfo.user.system === 1) {
-            commit("IS_NOT_TENANT");
-            app = userinfo.apps.find(item => item.code === APP_CODE_LIST[0]);
-            if (!app) reject({ status: 403, msg: "您没有产品访问权限" });
+            appFound = userinfo.apps.find(item => item.code === APP_CODE_LIST[0]);
+            if (!appFound) reject({ redirect: 403, msg: "您没有产品访问权限" });
           } else {
-            // 商户用户
             let tenantId = "";
             if (userinfo.tenant && userinfo.tenant.id) {
               tenantId = userinfo.tenant.id
@@ -68,19 +100,30 @@ const user = {
             }
 
             if (tenantId === "") {
-              // tenantId 扔为空, reject error
-              reject({  status: 403, msg: "用户身份未知" });
+              reject({ redirect: 403, msg: "用户身份未知" });
             } else {
-              // tenantId 不为空, mutaition 商户 ID
-              commit("SET_TENANT_ID", tenantId);
-              app = userinfo.apps.find(item => item.code === APP_CODE_LIST[1]);
-              if (!app) reject({ status: 403, msg: "您没有产品访问权限" });
+              appFound = userinfo.apps.find(item => item.code === APP_CODE_LIST[1]);
+              if (!appFound) reject({ redirect: 403, msg: "您没有产品访问权限" });
             }
           }
 
-          // 由于 router.beforeEach 钩子函数中, 
-          // 当且仅当 app 存在, 并且不为空对象, 才更新其他 state
-          if (app && JSON.stringify(app) !== "{}") {
+          // --------------------------------------------------
+          // 自定义 app.code 校验规则
+          // END
+
+
+          /**
+           * 由于 router.beforEach() 中
+           * 
+           * 依据 user.id = true or false
+           * 
+           * 来判断是否进行用户信息的拉取
+           * 
+           * 因此, 你必须要在 appFound 完成初始化"后", 且不为空对象"时"
+           * 
+           *  ----- 才可更新其他的 state -----
+           */
+          if (appFound && JSON.stringify(appFound) !== "{}") {
             // mutation 用户 ID
             commit("SET_ID", userinfo.user.id);
 
@@ -89,13 +132,16 @@ const user = {
 
             // mutation 账户
             commit("SET_USERNAME", userinfo.user.userName);
+
+            // mutation 商户 or !商户
+            userinfo.user.system === 1 && commit("IS_NOT_TENANT");
           }
 
           // resolve apps
           resolve(userinfo.apps);
 
         }).catch(error => {
-          reject({ status: 500, msg: "无法拉取用户数据, 请稍后再试!"});
+          reject({ redirect: 500, msg: "无法拉取用户数据, 请稍后再试!"});
         })
       })
     },
