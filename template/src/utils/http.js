@@ -1,7 +1,6 @@
 import axios from "axios"
 import Auth from "./auth"
 import { BACKEND_DOMAIN } from "./env"
-import { JWT_EXPIRES_CODE } from "./constants"
 
 const http = axios.create({
   baseURL: BACKEND_DOMAIN,
@@ -18,17 +17,19 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(response => {
   const code = response.data.code;
-  if (JWT_EXPIRES_CODE.indexOf(code) > -1) {
+  if (code === "110002" || code === "110003" || code === "110103" || code === "110004") {
     Auth.logOut();
     return;
   }
-
-  if( code != 200) {
-    return Promise.reject(response.data);
-  }
-
   return response.data;
 }, error => {
+  if (error.response) {
+    const code = error.response.data.code;
+    if (code === "110002" || code === "110003" || code === "110103" || code === "110004") {
+      Auth.logOut();
+      return;
+    }
+  }
   return Promise.reject(error);
 });
 

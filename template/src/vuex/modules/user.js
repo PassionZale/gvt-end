@@ -1,7 +1,6 @@
 import { fetchUser } from "~/api/auth"
 import Auth from "~/utils/auth"
 import { APP_CODE_LIST } from "~/utils/env"
-import { JWT_EXPIRES_CODE } from "~/utils/constants"
 
 const user = {
   state: {
@@ -46,7 +45,7 @@ const user = {
       return new Promise((resolve, reject) => {
         fetchUser().then(response => {
 
-          if(JWT_EXPIRES_CODE.indexOf(response.data.code) > -1) {
+          if(["110002", "110003", "110004", "110103"].indexOf(response.data.code) > -1) {
             reject({ redirect: "login", msg: "登录过期, 请重新登录!" });
             return;
           }
