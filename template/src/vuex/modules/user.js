@@ -45,11 +45,6 @@ const user = {
       return new Promise((resolve, reject) => {
         fetchUser().then(response => {
 
-          if(["110002", "110003", "110004", "110103"].indexOf(response.data.code) > -1) {
-            reject({ redirect: "login", msg: "登录过期, 请重新登录!" });
-            return;
-          }
-
           // 用户数据源
           const userinfo = response.data;
 
@@ -141,7 +136,11 @@ const user = {
           resolve(userinfo.apps);
 
         }).catch(error => {
-          reject({ redirect: 500, msg: "无法拉取用户数据, 请稍后再试!"});
+          if(error && error.redirect) {
+            reject(error);
+          } else {
+            reject({ redirect: 500, msg: "无法拉取用户数据, 请稍后再试!"});
+          }
         })
       })
     },
