@@ -20,7 +20,7 @@ http.interceptors.response.use(response => {
   const code = response.data.code;
 
   if(JWT_EXPIRES_CODE.indexOf(code) > -1) {
-    return Promise.reject({redirect: "/login", msg: "登录过期, 请重新登录!"})
+    return Promise.reject({redirect: "login", msg: "登录过期, 请重新登录!"})
   }
 
   if(code != 200) {
