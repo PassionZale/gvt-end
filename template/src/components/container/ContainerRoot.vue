@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Auth from "~/utils/auth";
-import { ENV } from "~/utils/env";
+import Auth from "@/utils/auth";
+import { ENV } from "@/utils/env";
 import { mapGetters } from "vuex";
 
 export default {

@@ -1,6 +1,6 @@
-import { fetchUser } from "~/api/auth"
-import Auth from "~/utils/auth"
-import { APP_CODE_LIST } from "~/utils/env"
+import { fetchUser } from "@/api/auth"
+import Auth from "@/utils/auth"
+import { APP_CODE_LIST } from "@/utils/env"
 
 const user = {
   state: {

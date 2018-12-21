@@ -1,5 +1,5 @@
-import http from "~/utils/http"
-import { USER_LOGIN_API_URL, USER_INFO_API_URL } from "~/utils/env"
+import http from "@/utils/http"
+import { USER_LOGIN_API_URL, USER_INFO_API_URL } from "@/utils/env"
 
 /**
  * 用户登录
