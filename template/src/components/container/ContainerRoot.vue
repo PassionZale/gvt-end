@@ -1,10 +1,9 @@
 <template>
   <hero-layout
-    username="GVT END"
+    :username="user.userName"
     :menu-data="menuData" 
     :route-matched="routeMatched"
-    @user-logout-click="logout"
-  >
+    @user-logout-click="logout">
     <div slot="content">
       <router-view></router-view>
     </div>
@@ -17,7 +16,7 @@ import { ENV } from "@/utils/env";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "container-root",
+  name: "ContainerRoot",
 
   data() {
     return {
@@ -27,7 +26,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["menus"])
+    ...mapGetters(["menus", "user"])
   },
 
   watch: {
@@ -58,4 +57,3 @@ export default {
   }
 }
 </script>
-

@@ -10,7 +10,6 @@
 
 <script>
 export default {
-  name: "container-base"
+  name: "ContainerBase"
 };
 </script>
-
