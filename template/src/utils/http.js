@@ -1,5 +1,6 @@
 import axios from "axios"
 import Auth from "./auth"
+import Lang from "./lang"
 import { BACKEND_DOMAIN } from "./env"
 import { JWT_EXPIRES_CODE } from "./constants"
 
@@ -7,6 +8,8 @@ const http = axios.create({
   baseURL: BACKEND_DOMAIN,
   timeout: 5000
 });
+
+http.defaults.headers.common["Accept-Language"] = Lang.getLang();
 
 http.interceptors.request.use(config => {
   const jwt = Auth.getToken();
