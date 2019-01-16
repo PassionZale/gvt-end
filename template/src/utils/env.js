@@ -8,7 +8,7 @@ const USER_INFO_API_URL = "/ums/auth/getUserRelateData";
 const APP_CODE_LIST = ["eos-gvt-liu-control", "gvt-eos-liu-merchant", "eos-gvt-liu-orderpost", "eos-gvt-liu-distribution", "eos-gvt-liu-substitute", "gvt-eos-liu-purchase", "eos-gvt-liu"];
 
 // webpack-dev-server port
-const WEBPACK_DEV_SERVER_PORT = 8082;
+const WEBPACK_DEV_SERVER_PORT = 9000;
 
 // webpack-dev-server proxy target
 const WEBPACK_DEV_SERVER_PROXY_TARGET = "http://192.168.1.195:8081/eos/";

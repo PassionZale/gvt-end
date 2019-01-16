@@ -3,10 +3,17 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var pathsToClean = ['dist']
+var packageJson = require("./package.json")
+
+var envs = require("./src/utils/env")
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    "main": "./src/main.js",
+    "vendor": Object.keys(packageJson.dependencies)
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js',
@@ -16,10 +23,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          use: ['css-loader']
+        })
       },
       {
         test: /\.less$/,
@@ -55,27 +62,53 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(pathsToClean),
-    new ExtractTextPlugin('iview-reset.css'),
+    new ExtractTextPlugin('main.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor'],
+      filename: '[name].js'
+    }),
     new HtmlWebpackPlugin({
-      chunks: ['main'],
+      chunks: ['main', 'vendor'],
       inject: 'body',
       hash: true,
       title: 'Astraea',
       filename: 'index.html',
       template: 'index.ejs',
+      minify: {
+        removeComments:true,
+        collapseWhitespace:true
+      }
     }),
+    new CopyWebpackPlugin([
+      { 
+        from: 'static',
+        to: 'static'
+      }
+    ])
   ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, './src')
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.vue', '.json'],
+  },
+  externals: {
+    'jquery': 'window.jQuery'
   },
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    port: envs.WEBPACK_DEV_SERVER_PORT,
+    proxy: {
+      [`${envs.BACKEND_DOMAIN}/*`]: {
+        target: envs.WEBPACK_DEV_SERVER_PROXY_TARGET,
+        pathRewrite: {
+          [`^${envs.BACKEND_DOMAIN}`]: ""
+        }
+      }
+    }
   },
   performance: {
     hints: false
