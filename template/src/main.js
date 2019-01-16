@@ -7,17 +7,11 @@ import iView from "iview"
 import VueBus from "./utils/bus"
 import Auth from "./utils/auth"
 import Lang from "./utils/lang"
-import { i18n, loadLanguageAsync } from "@/setup/i18n-setup"
+import { i18n, setI18nLanguage } from "@/setup/i18n-setup"
 import * as filters from './filters/'
 
 Vue.use(iView, {
-    i18n: function(path, options) {
-      let value = i18n.t(path, options)
-      if (value !== null && value !== undefined) {
-          return value
-      }
-      return ""
-    }
+  i18n: (key, value) => i18n.t(key, value)
 });
 
 Vue.use(HeroUI);
@@ -35,12 +29,9 @@ router.beforeEach((to, from, next) => {
 
   // 初始化语种
   !Lang.getLang() && Lang.setLang();
-  (Lang.getLang() !== "zh-CN") && loadLanguageAsync(Lang.getLang())
+  setI18nLanguage(Lang.getLang())
 
-  /**
-   * 用以对接其他子系统跳转
-   * 每当 query.token 存在时, 更新本地 jwt
-   */
+  // 每当 query.token 存在时, 更新本地 jwt
   to.query.token && Auth.setToken(to.query.token);
 
   if(Auth.getToken()) {

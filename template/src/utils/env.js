@@ -1,26 +1,26 @@
 // 用户登录 API URL, excute domain!
-const USER_LOGIN_API_URL = "/login";
+const USER_LOGIN_API_URL = "/auth/login";
 
 // 用户信息 API URL, excute domain!
-const USER_INFO_API_URL = "/ums/auth/getUserRelateData";
+const USER_INFO_API_URL = "/auth/getUserRelateData";
 
 // 子系统 APP CODE LIST
-const APP_CODE_LIST = ["eos-gvt-liu-control", "gvt-eos-liu-merchant", "eos-gvt-liu-orderpost", "eos-gvt-liu-distribution", "eos-gvt-liu-substitute", "gvt-eos-liu-purchase", "eos-gvt-liu"];
+const APP_CODE_LIST = ["ums"];
 
 // webpack-dev-server port
 const WEBPACK_DEV_SERVER_PORT = 9000;
 
 // webpack-dev-server proxy target
-const WEBPACK_DEV_SERVER_PROXY_TARGET = "http://192.168.1.195:8081/eos/";
+const WEBPACK_DEV_SERVER_PROXY_TARGET = "htt://192.168.1.133:18001";
 
 // service for api baseURL
 let backend;
 switch (process.env.NODE_ENV) {
   case "release":
-    backend = "http://192.168.1.195:8081/eos/";
+    backend = "htt://192.168.1.133:18001";
     break;
   case "production":
-    backend = "http://192.168.1.195:8081/eos/";
+    backend = "htt://192.168.1.133:18001";
     break;
   default:
     backend = "/api";

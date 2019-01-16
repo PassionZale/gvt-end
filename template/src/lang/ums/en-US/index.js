@@ -8,8 +8,8 @@ const lang = {
 
     form: {
       btn: {
-        search:           "搜索",
-        reset:            "重置",
+        search:           "Search",
+        reset:            "Rest",
       },
 
       label: {}
@@ -20,8 +20,8 @@ const lang = {
 
       tbody: {
         operate: {
-          edit:            "编辑",
-          remove:          "删除",
+          edit:            "Edit",
+          remove:          "Remove",
         },
       },
     },

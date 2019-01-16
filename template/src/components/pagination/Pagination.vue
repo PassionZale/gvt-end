@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Select v-model="pagination.pageSize" @on-change="handlePageSizeChange" class="gvt-page-size">
+    <Select 
+      v-model="pagination.pageSize" 
+      @on-change="handlePageSizeChange" 
+      class="gvt-page-size">
       <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">
         {{ $t('common.pagination', { pageSize: item }) }}
       </Option>
