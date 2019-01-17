@@ -5,6 +5,7 @@ import ContainerRoot from "@/components/container/ContainerRoot.vue"
 import Console from "@/views/console/Index.vue"
 import Login from "@/views/auth/Login.vue"
 import * as ErrorView from "@/views/error"
+import { routerT } from "@/setup/i18n-setup"
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,7 @@ const routes = [
     name: "root",
     component: ContainerRoot,
     redirect: {name: "console"},
-    meta: { title: "首页" },
+    meta: { title: routerT("router.consoles") },
     children: [
       {
         path: "console",

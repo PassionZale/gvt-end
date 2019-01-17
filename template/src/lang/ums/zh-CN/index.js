@@ -1,7 +1,10 @@
 import iviewZH from "iview/dist/locale/zh-CN"
+import routerZH from "./router"
 
 const lang = {
   ...iviewZH,
+  
+  ...routerZH,
 
   common: {
     pagination:           "{pageSize} 条/页",

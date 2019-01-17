@@ -1,7 +1,10 @@
 import iviewEN from "iview/dist/locale/en-US"
+import routerEN from "./router"
 
 const lang = {
   ...iviewEN,
+  
+  ...routerEN,
 
   common: {
     pagination:           "{pageSize} /page",
