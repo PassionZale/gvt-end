@@ -12,8 +12,8 @@
     <br>
 
     <h3>按钮文本</h3>
-    <Button>{{ $t("common.form.btn.search") }}</Button>
-    <Button>{{ $t("common.form.btn.reset") }}</Button>
+    <Button>\{{ $t("common.form.btn.search") }}</Button>
+    <Button>\{{ $t("common.form.btn.reset") }}</Button>
     <br>
     <br>
     

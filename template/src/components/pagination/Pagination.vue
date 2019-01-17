@@ -5,7 +5,7 @@
       @on-change="handlePageSizeChange" 
       class="gvt-page-size">
       <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">
-        {{ $t('common.pagination', { pageSize: item }) }}
+        \{{ $t('common.pagination', { pageSize: item }) }}
       </Option>
     </Select>
     <Page
