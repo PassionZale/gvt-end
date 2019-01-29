@@ -11,16 +11,16 @@ const APP_CODE_LIST = ["ums"];
 const WEBPACK_DEV_SERVER_PORT = 9000;
 
 // webpack-dev-server proxy target
-const WEBPACK_DEV_SERVER_PROXY_TARGET = "htt://192.168.1.133:18001";
+const WEBPACK_DEV_SERVER_PROXY_TARGET = "http://192.168.1.133:18001";
 
 // service for api baseURL
 let backend;
 switch (process.env.NODE_ENV) {
   case "release":
-    backend = "htt://192.168.1.133:18001";
+    backend = "http://192.168.1.133:18001";
     break;
   case "production":
-    backend = "htt://192.168.1.133:18001";
+    backend = "http://192.168.1.133:18001";
     break;
   default:
     backend = "/api";
