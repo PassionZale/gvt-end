@@ -40,10 +40,8 @@ ENV | String | "release" | Nodejs 环境变量
 ```predev```
 ----
 
-再运行时, 加入了 ```predev hook```, 它会执行 ```./env_validator.js```, 其检查项如下:
+在运行时, 加入了 ```predev hook```, 它会执行 ```./env_validator.js```, 其检查项如下:
 
 - USER_LOGIN_API_URL
 
 - USER_INFO_API_URL
-
-- APP_CODE_LIST

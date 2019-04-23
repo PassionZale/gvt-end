@@ -2,7 +2,7 @@ const prefixLang = "GVT_I18N_LANG";
 
 class Lang {
 
-  constructor() {}
+  constructor() { }
 
   static setLang(lang = "zh-CN") {
     return localStorage.setItem(prefixLang, lang);

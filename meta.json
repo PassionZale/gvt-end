@@ -16,5 +16,6 @@
       "default": "Frontend Developers For GVT"
     }
   },
+  "skipInterpolation": "src/**/*.vue",
   "completeMessage": "{{#inPlace}}To get started:\n\n  npm install\n  npm run dev{{else}}To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev{{/inPlace}}"
 }

@@ -1,12 +1,13 @@
 import axios from "axios"
 import Auth from "./auth"
 import Lang from "./lang"
-import { BACKEND_DOMAIN } from "./env"
+import store from "@/vuex/store"
 import { JWT_EXPIRES_CODE } from "./constants"
+import { TIMEOUT, BACKEND_DOMAIN } from "@/utils/env"
 
 const http = axios.create({
   baseURL: BACKEND_DOMAIN,
-  timeout: 5000
+  timeout: TIMEOUT
 });
 
 http.defaults.headers.common["Accept-Language"] = Lang.getLang();
@@ -22,17 +23,22 @@ http.interceptors.request.use(config => {
 http.interceptors.response.use(response => {
   const code = response.data.code;
 
-  if(JWT_EXPIRES_CODE.indexOf(code) > -1) {
-    return Promise.reject({redirect: "login", msg: "登录过期, 请重新登录!"})
+  if (JWT_EXPIRES_CODE.indexOf(code) > -1) {
+    store.dispatch("Logout")
+    return Promise.reject({ source: "JWT", message: "登录过期,请重新登录!" })
   }
 
-  if(code != 200) {
+  if (code != 200) {
     return Promise.reject(response.data);
   }
 
   return response.data;
 }, error => {
-  return Promise.reject(error);
+  if (error.code === "ECONNABORTED") {
+    return Promise.reject({ message: "请求超时" })
+  } else {
+    return Promise.reject(error);
+  }
 });
 
 export default http;

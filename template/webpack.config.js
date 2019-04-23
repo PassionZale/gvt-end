@@ -34,7 +34,7 @@ module.exports = {
           fallback: 'vue-style-loader',
           use: ['css-loader', 'less-loader']
         })
-      },      
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -75,12 +75,12 @@ module.exports = {
       filename: 'index.html',
       template: 'index.ejs',
       minify: {
-        removeComments:true,
-        collapseWhitespace:true
+        removeComments: true,
+        collapseWhitespace: true
       }
     }),
     new CopyWebpackPlugin([
-      { 
+      {
         from: 'static',
         to: 'static'
       }
@@ -93,10 +93,8 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json'],
   },
-  externals: {
-    'jquery': 'window.jQuery'
-  },
   devServer: {
+    host: envs.WEBPACK_DEV_SERVER_HOST,
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
@@ -116,7 +114,7 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'release') {
+if (process.env.NODE_ENV !== 'development') {
   module.exports.devtool = false;
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({

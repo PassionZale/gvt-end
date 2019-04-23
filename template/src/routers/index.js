@@ -1,26 +1,20 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import ContainerRoot from "@/components/container/ContainerRoot.vue"
-import Console from "@/views/console/Index.vue"
-import Login from "@/views/auth/Login.vue"
-import * as ErrorView from "@/views/error"
-import { routerT } from "@/setup/i18n-setup"
-
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: "/",
     name: "root",
-    component: ContainerRoot,
+    component: () => import("@/components/container/ContainerRoot"),
     redirect: {name: "console"},
-    meta: { title: routerT("router.consoles") },
+    meta: { title: "控制台" },
     children: [
       {
         path: "console",
         name: "console",
-        component: Console
+        component: () => import("@/views/console")
       }
     ]
   },
@@ -28,28 +22,28 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: () => import("@/views/auth/Login"),
     meta: { title: "登录" }
   },
 
   {
     path: "/403",
     name: "403",
-    component: ErrorView.Error403,
+    component: () => import("@/views/error/403"),
     meta: { title: 403 }
   },
 
   {
     path: "/404",
     name: "404",
-    component: ErrorView.Error404,
+    component: () => import("@/views/error/404"),
     meta: { title: 404 }
   },
 
   {
     path: "/500",
     name: "500",
-    component: ErrorView.Error500,
+    component: () => import("@/views/error/500"),
     meta: { title: 500 }
   },
 

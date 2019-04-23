@@ -1,11 +1,168 @@
-@import "./copyright.less";
-@import "./variables.less";
+/*!
+* Reset css for iview 2.*
+*
+* Website:          https://www.lovchun.com
+* Github:           https://github.com/PassionZale
+* Author:           Lei Zhang
+*/
+@distance-small: 10px;
+@distance-default: 20px;
+@distance-large: 40px;
+@primary-color: #2d8cf0;
+@default-background-color: #f9f9f9;
+@left-container-width: 250px;
+@ivew-input-width: 200px;
 
 html,
 body {
   height: 100%;
-  background-color: #f0f2f5;
+  background-color: @default-background-color;
   position: relative;
   padding: 0;
   margin: 0;
+}
+
+.input_width {
+  width: @ivew-input-width;
+}
+
+.ivu-input,
+.ivu-select {
+  width: @ivew-input-width;
+}
+
+.gvt-content {
+  padding: @distance-small  !important;
+  position: relative;
+
+  .main {
+    padding: @distance-default  !important;
+  }
+}
+
+.LayoutList {
+  .form-wrapper {
+    padding-bottom: @distance-default;
+
+    .ivu-form-item {
+      margin-bottom: @distance-default  !important;
+    }
+  }
+
+  .tool-wrapper {
+    padding-bottom: @distance-default;
+
+    .tool-left {
+      text-align: left;
+    }
+
+    .tool-right {
+      text-align: right;
+    }
+  }
+
+  .table-wrapper {
+    .ivu-table {
+      .ivu-btn-text {
+        color: @primary-color;
+        border-radius: 0;
+        padding: 0;
+        margin-right: @distance-default;
+      }
+    }
+  }
+
+  .page-wrapper {
+    padding-top: @distance-default;
+    text-align: right;
+  }
+}
+
+.LayoutTree {
+  min-height: 500px;
+
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+
+  .left-container {
+    float: left;
+    width: @left-container-width;
+
+    .tree-tool-wrapper {
+      padding-bottom: @distance-small;
+
+      button {
+        margin-bottom: @distance-small;
+      }
+    }
+  }
+
+  .distance-wrapper {
+    position: absolute;
+    left: @left-container-width + @distance-default + @distance-small;
+    top: 0;
+    bottom: 0;
+    width: @distance-small;
+    background: @default-background-color;
+  }
+
+  .right-container {
+    margin-left: @left-container-width + @distance-default + @distance-small;
+
+    &::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .form-wrapper {
+      padding-bottom: @distance-large;
+
+      .ivu-form-item {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    .tool-wrapper {
+      padding-bottom: @distance-default;
+      overflow: auto;
+
+      .tool-left,
+      .tool-right {
+        display: block;
+        width: 50%;
+      }
+
+      .tool-left {
+        float: left;
+        text-align: left;
+      }
+
+      .tool-right {
+        float: right;
+        text-align: right;
+      }
+    }
+
+    .table-wrapper {
+      .ivu-table {
+        .ivu-btn-text {
+          color: @primary-color;
+          border-radius: 0;
+          padding: 0;
+          margin-right: @distance-default;
+        }
+      }
+    }
+
+    .page-wrapper {
+      padding-top: @distance-default;
+      float: left;
+      width: 100%;
+      text-align: right;
+    }
+  }
 }

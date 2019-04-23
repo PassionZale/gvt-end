@@ -1,9 +1,15 @@
 <template>
   <hero-layout
+    :locale="locale"
     :username="user.userName"
-    :menu-data="menuData" 
+    :menu-data="menuData"
     :route-matched="routeMatched"
-    @user-logout-click="logout">
+    :menu-info="user.isTenant"
+    menu-pwd
+    @user-info-click="goHome"
+    @user-pwd-click="changePassword"
+    @user-logout-click="logout"
+  >
     <div slot="content">
       <router-view></router-view>
     </div>
@@ -13,7 +19,8 @@
 <script>
 import Auth from "@/utils/auth";
 import { ENV } from "@/utils/env";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import Lang from "@/utils/lang";
 
 export default {
   name: "ContainerRoot",
@@ -21,8 +28,9 @@ export default {
   data() {
     return {
       menuData: [],
-      routeMatched: []
-    }
+      routeMatched: [],
+      locale: Lang.getLang()
+    };
   },
 
   computed: {
@@ -46,14 +54,24 @@ export default {
   },
 
   methods: {
+    ...mapActions(["Logout"]),
+
     logout() {
-      Auth.logOut();
+      this.Logout();
+    },
+
+    goHome() {
+      return;
+    },
+
+    changePassword() {
+      return;
     },
 
     mockMenuData() {
-      var mock = require("../../mock/menuData.js");
-      return mock.menuData;
+      const mockData = require("../../mock/menuData.js");
+      return mockData.menuData;
     }
   }
-}
+};
 </script>

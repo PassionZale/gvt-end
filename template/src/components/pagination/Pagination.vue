@@ -1,11 +1,12 @@
 <template>
   <div>
-    <Select 
+    <Select
+      v-show="!disPageSize" 
       v-model="pagination.pageSize" 
       @on-change="handlePageSizeChange" 
       class="gvt-page-size">
       <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">
-        \{{ $t('common.pagination', { pageSize: item }) }}
+        {{ $t('common.pagination', { pageSize: item }) }}
       </Option>
     </Select>
     <Page
@@ -26,6 +27,8 @@ export default {
   name: "Pagination",
 
   props: {
+    disPageSize: Boolean,
+
     pagination: {
       type: Object,
       default: () => {
@@ -48,7 +51,7 @@ export default {
 
 <style lang="less">
 .gvt-page-size {
-  width: 100px;
+  width: 120px;
   text-align: center;
   display: inline-block;
   line-height: 32px;
