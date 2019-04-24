@@ -21,7 +21,7 @@ const TIMEOUT = 10000;
 let backend;
 switch (process.env.NODE_ENV) {
   // 测试环境
-  case "st":
+  case "sit":
     backend = "http://192.168.1.133:18001";
     break;
   // 生产环境
