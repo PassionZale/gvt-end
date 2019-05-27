@@ -8,8 +8,8 @@
   "scripts": {
     "predev": "node ./src/scripts/env_validator.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build:sit": "cross-env NODE_ENV=sit webpack --progress --hide-modules && node ./src/scripts/archive.js --filename sit",
-    "build:pro": "cross-env NODE_ENV=production webpack --progress --hide-modules && node ./src/scripts/archive.js --filename pro"
+    "build:sit": "cross-env NODE_ENV=sit webpack --progress --hide-modules",
+    "build:pro": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
     "axios": "^0.18.0",
