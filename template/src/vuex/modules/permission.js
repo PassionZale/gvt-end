@@ -23,7 +23,7 @@ function parseApps(apps) {
       app.bisFunctions.forEach(item => {
         let obj = {name: item.name, enName: item.enName, icon: item.icon, uri: `${item.uri}`, childBisFunction: item.childBisFunction || []};
         if(item.childBisFunction) {
-          obj.childBisFunction = item.childBisFunction.map(child => ({name: child.name, enName: item.enName, icon: child.icon, uri: `${child.uri}`}));
+          obj.childBisFunction = item.childBisFunction.map(child => ({name: child.name, enName: child.enName, icon: child.icon, uri: `${child.uri}`}));
         }
         menus.push(obj);
       })
