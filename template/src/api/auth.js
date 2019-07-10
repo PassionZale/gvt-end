@@ -25,3 +25,19 @@ export function fetchUser() {
     url: USER_INFO_API_URL
   })
 }
+
+// 获取第三方登录支持的方式
+export function supportType() {
+  return http({
+    method: "get",
+    url: "/tpauth/supportType"
+  })
+}
+
+// 根据域名获取OEM信息
+export function getOemByDomain(hostname) {
+  return http({
+    method: "get",
+    url: `/tenant/getOemByDomain/${hostname}`
+  })
+}

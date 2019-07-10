@@ -9,6 +9,8 @@ const lang = {
   common: {
     pagination:           "{pageSize} 条/页",
 
+    message: { accOrPassword: "账户或密码错误" },
+
     form: {
       btn: {
         search:           "搜索",

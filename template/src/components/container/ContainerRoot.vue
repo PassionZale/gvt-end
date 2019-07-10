@@ -5,6 +5,8 @@
     :menu-data="menuData"
     :route-matched="routeMatched"
     :menu-info="user.isTenant"
+    :app-target="appTarget"
+    :logo="user.logo"
     menu-pwd
     @user-info-click="goHome"
     @user-pwd-click="changePassword"
@@ -34,7 +36,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["menus", "user"])
+    ...mapGetters(["menus", "user", "isTenant", "appTarget"])
   },
 
   watch: {

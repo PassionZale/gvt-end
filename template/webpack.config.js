@@ -99,6 +99,8 @@ module.exports = {
     noInfo: true,
     overlay: true,
     port: envs.WEBPACK_DEV_SERVER_PORT,
+    open: true,
+    openPage: envs.WEBPACK_OPEN_PAGE,
     proxy: {
       [`${envs.BACKEND_DOMAIN}/*`]: {
         target: envs.WEBPACK_DEV_SERVER_PROXY_TARGET,

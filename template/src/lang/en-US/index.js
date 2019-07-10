@@ -9,6 +9,8 @@ const lang = {
   common: {
     pagination:           "{pageSize} /page",
 
+    message: { accOrPassword: "Wrong account or password" },
+
     form: {
       btn: {
         search:           "Search",
